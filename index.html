@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Flight Delay Prediction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #e9ecef;
+            margin: 0;
+            padding: 0;
+        }
+        main {
+            max-width: 420px;
+            margin: 48px auto;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+            padding: 36px 28px 28px 28px;
+        }
+        h1 {
+            text-align: center;
+            color: #1976d2;
+            margin-bottom: 28px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+        .date-row {
+            display: flex;
+            gap: 10px;
+            align-items: flex-end;
+        }
+        .date-row > div {
+            flex: 1;
+        }
+        .time-row {
+            display: flex;
+            gap: 10px;
+            align-items: flex-end;
+        }
+        .time-row > div {
+            flex: 1;
+        }
+        label {
+            font-weight: 600;
+            margin-bottom: 4px;
+            color: #333;
+            display: block;
+        }
+        input[type="text"],
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #bfc9d1;
+            border-radius: 5px;
+            font-size: 1em;
+            background: #f8fafc;
+            transition: border-color 0.2s;
+            box-sizing: border-box;
+        }
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        select:focus {
+            border-color: #1976d2;
+            outline: none;
+        }
+        button[type="submit"] {
+            background: #1976d2;
+            color: #fff;
+            border: none;
+            padding: 14px;
+            border-radius: 5px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background 0.2s;
+            letter-spacing: 1px;
+        }
+        button[type="submit"]:hover {
+            background: #125ea2;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <h1>Flight Delay Prediction</h1>
+        <form action="/predict" method="POST">
+            <div class="date-row">
+                <div>
+                    <label for="day">Day</label>
+                    <input type="number" id="day" name="day" min="1" max="31" required>
+                </div>
+                <div>
+                    <label for="month">Month</label>
+                    <input type="number" id="month" name="month" min="1" max="12" required>
+                </div>
+                <div>
+                    <label for="year">Year</label>
+                    <input type="number" id="year" name="year" min="2015" max="2024" required>
+                </div>
+            </div>
+            <div class="time-row">
+                <div>
+                    <label for="hour">Hour</label>
+                    <input type="number" id="hour" name="hour" min="0" max="23" required>
+                </div>
+                <div>
+                    <label for="minute">Minute</label>
+                    <input type="number" id="minute" name="minute" min="0" max="59" required>
+                </div>
+            </div>
+            <label for="flightNumber">Flight Number:</label>
+            <select id="flightNumber" name="flightNumber" required>
+                <option value="">Select Flight Number</option>
+                <option value="1001">1001</option>
+                <option value="1002">1002</option>
+                <option value="1003">1003</option>
+                <option value="1100">1100</option>
+                <option value="1205">1205</option>
+                <option value="1307">1307</option>
+                <option value="2001">2001</option>
+                <option value="2102">2102</option>
+                <option value="2203">2203</option>
+                <option value="2304">2304</option>
+                <option value="3005">3005</option>
+                <option value="3106">3106</option>
+                <option value="3207">3207</option>
+                <option value="4008">4008</option>
+                <option value="4109">4109</option>
+                <option value="4200">4200</option>
+                <option value="4500">4500</option>
+                <!-- Add more flight numbers from your dataset as needed -->
+            </select>
+            <label for="originAirport">Origin Airport:</label>
+            <select id="originAirport" name="originAirport" required>
+                <option value="">Select Origin Airport</option>
+                <option value="ATL">Atlanta (ATL)</option>
+                <option value="LAX">Los Angeles (LAX)</option>
+                <option value="ORD">Chicago O'Hare (ORD)</option>
+                <option value="DFW">Dallas/Fort Worth (DFW)</option>
+                <option value="DEN">Denver (DEN)</option>
+                <option value="JFK">New York JFK (JFK)</option>
+                <option value="SEA">Seattle (SEA)</option>
+                <option value="SFO">San Francisco (SFO)</option>
+                <option value="LAS">Las Vegas (LAS)</option>
+                <option value="MCO">Orlando (MCO)</option>
+                <option value="CLT">Charlotte (CLT)</option>
+                <option value="PHX">Phoenix (PHX)</option>
+                <option value="MIA">Miami (MIA)</option>
+                <option value="IAH">Houston (IAH)</option>
+                <option value="BOS">Boston (BOS)</option>
+                <!-- Add more airports from your dataset as needed -->
+            </select>
+            <label for="destinationAirport">Destination Airport:</label>
+            <select id="destinationAirport" name="destinationAirport" required>
+                <option value="">Select Destination Airport</option>
+                <option value="ATL">Atlanta (ATL)</option>
+                <option value="LAX">Los Angeles (LAX)</option>
+                <option value="ORD">Chicago O'Hare (ORD)</option>
+                <option value="DFW">Dallas/Fort Worth (DFW)</option>
+                <option value="DEN">Denver (DEN)</option>
+                <option value="JFK">New York JFK (JFK)</option>
+                <option value="SEA">Seattle (SEA)</option>
+                <option value="SFO">San Francisco (SFO)</option>
+                <option value="LAS">Las Vegas (LAS)</option>
+                <option value="MCO">Orlando (MCO)</option>
+                <option value="CLT">Charlotte (CLT)</option>
+                <option value="PHX">Phoenix (PHX)</option>
+                <option value="MIA">Miami (MIA)</option>
+                <option value="IAH">Houston (IAH)</option>
+                <option value="BOS">Boston (BOS)</option>
+                <!-- Add more airports from your dataset as needed -->
+            </select>
+            <label for="airline">Airline:</label>
+            <select id="airline" name="airline" required>
+                <option value="">Select Airline</option>
+                <option value="AA">American Airlines (AA)</option>
+                <option value="DL">Delta Air Lines (DL)</option>
+                <option value="UA">United Airlines (UA)</option>
+                <option value="WN">Southwest Airlines (WN)</option>
+                <option value="AS">Alaska Airlines (AS)</option>
+                <option value="B6">JetBlue Airways (B6)</option>
+                <option value="F9">Frontier Airlines (F9)</option>
+                <option value="NK">Spirit Airlines (NK)</option>
+                <option value="VX">Virgin America (VX)</option>
+                <option value="HA">Hawaiian Airlines (HA)</option>
+                <option value="MQ">Envoy Air (MQ)</option>
+                <option value="OO">SkyWest Airlines (OO)</option>
+                <option value="EV">ExpressJet Airlines (EV)</option>
+                <option value="YV">Mesa Airlines (YV)</option>
+                <option value="G4">Allegiant Air (G4)</option>
+                <!-- Add more airlines from your dataset as needed -->
+            </select>
+            <label for="tailNumber">Tail Number:</label>
+            <input type="text" id="tailNumber" name="tailNumber" required
+                pattern="N\d{3}[A-Z]{2}" title="Format: N followed by 3 digits and 2 uppercase letters, e.g., N853AA">
+
+            <label for="distance">Distance (miles):</label>
+            <input type="number" id="distance" name="distance" min="400" required>
+
+            <button type="submit">Predict Delay</button>
+
+        </form>
+    </main>
+    <script>
+    document.querySelector('form').addEventListener('submit', function(e) {
+        const origin = document.getElementById('originAirport').value;
+        const destination = document.getElementById('destinationAirport').value;
+        if (origin === destination) {
+            alert('Origin and destination airports must be different.');
+            e.preventDefault();
+        }
+    });
+    </script>
+</body>
+</html>

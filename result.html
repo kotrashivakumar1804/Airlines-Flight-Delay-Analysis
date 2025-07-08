@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f7fa;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background: #1976d2;
+            color: #fff;
+            padding: 24px 0 12px 0;
+            text-align: center;
+        }
+        main {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 60vh;
+        }
+        .result-container {
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+            padding: 32px 36px;
+            margin-top: 36px;
+            min-width: 340px;
+        }
+        .result-container h2 {
+            color: #1976d2;
+            margin-top: 0;
+        }
+        .result-container p {
+            font-size: 1.1em;
+            color: #333;
+        }
+        .result-container a {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 22px;
+            background: #1976d2;
+            color: #fff;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.2s;
+        }
+        .result-container a:hover {
+            background: #125ea2;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Flight Delay Prediction</h1>
+    </header>
+    <main>
+<div class="result-container">
+    <h2>Prediction Results</h2>
+    <p><strong>Distance:</strong> {{ distance }} miles</p>
+    <p><strong>From:</strong> {{ origin_airport }} <strong>to</strong> {{ destination_airport }}</p>
+    <p><strong>Predicted Delay:</strong> {{ delay_hours }} hour(s) {{ delay_minutes }} minute(s)</p>
+    {% if delay_status == "Early Arrival" %}
+        <p style="color:blue;"><strong>This flight is expected to arrive earlier than scheduled.</strong></p>
+    {% elif delay_status == "On Time" %}
+        <p style="color:green;"><strong>This flight is expected to be on time.</strong></p>
+    {% elif delay_status == "Short Delay" %}
+        <p style="color:orange;"><strong>This flight is expected to have a short delay (≤ 15 min).</strong></p>
+    {% elif delay_status == "Moderate Delay" %}
+        <p style="color:darkorange;"><strong>This flight is expected to have a moderate delay (16–45 min).</strong></p>
+    {% elif delay_status == "Significant Delay" %}
+        <p style="color:red;"><strong>This flight is expected to have a significant delay (&gt; 45 min).</strong></p>
+    {% else %}
+        <p><strong>Delay status unknown.</strong></p>
+    {% endif %}
+        <a href="/">Go Back</a>
+</div>
+</div>
+    </main>
+</body>
+</html>
