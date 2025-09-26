@@ -1,43 +1,29 @@
-Project Overview: Discover the Spiritual Side of Travel
-What is the Project About?
-This project is a web-based platform designed to promote temple tourism and spiritual travel in India. It helps users—both tourists and pilgrims—explore and learn about various temples, their cultural significance, history, and nearby attractions.
+This project is a machine learning–based flight delay prediction system.
+It uses real flight datasets (airlines, airports, and flight schedules) to analyze delays and predict whether a flight will be on time or delayed. The workflow involves:
 
- Project Objective
-The main goal is to:
+Data Collection & Cleaning
 
-Promote India's spiritual heritage
+Raw datasets (airlines, airports, and flights) are cleaned and transformed.
 
-Make temple-related information easily accessible
+Preprocessing includes handling missing values, encoding categorical variables, and feature selection.
 
-Help people plan spiritually meaningful trips
+Exploratory Data Analysis (EDA)
 
-Key Features
-Temple Directory
+Statistical and visual analysis of flight patterns, delay causes, and relationships between features.
 
-Browse temples by region, deity, or cultural themes
+Model Training & Optimization
 
-View temple details: history, rituals, architecture, timings
+Machine learning models are trained on historical flight data.
 
-Interactive Maps
+Optimized models (saved as .pkl) are used to predict flight delays.
 
-Shows temple locations using Google Maps API or Leaflet.js
+Evaluation
 
-Helps users discover nearby spiritual places
+Performance metrics (accuracy, precision, recall, etc.) are computed to assess model quality.
 
-Multimedia Integration
+Prediction & Deployment
 
-Images, videos, and possibly virtual tours to enrich the experience
+predict.py and routes.py suggest a prediction service or API is included.
 
-User-Friendly Interface
-
-Simple, responsive UI for smooth navigation on all devices
-
-Technologies Used
-Frontend: HTML, CSS, JavaScript
-
-Backend (Optional): Python Flask or Node.js
-
-Database: SQLite or Firebase
-
-Maps: Google Maps API or Leaflet.js
+Likely allows real-time or batch predictions on new flight data.
 
